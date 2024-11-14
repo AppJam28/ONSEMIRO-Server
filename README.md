@@ -8,7 +8,7 @@
 ```
 
 ### 사용 방법
-repository 상단에 use template를 통해서 사용할 수 있습니다.
+repository 상단에 **use template**를 통해서 사용할 수 있습니다.
 
 > 튜토리얼 image와 README 부분은 프로젝트 세팅 완료시 삭제해주세요.
 
@@ -22,9 +22,11 @@ repository 상단에 use template를 통해서 사용할 수 있습니다.
     - error
     - security
 
+### 패키지 설명
+
 user, error 에는 학생 데이터 템플릿과 공통 에러 객체, 에러 핸들링 클래스들이 존재합니다.
 
----
+### 참고사항
 
 예외를 throw하는 방법은 GlobalException을 throw하시면서 에러메세지와 HttpStatus 값을 사용해 생성하셔서 throw하시면 됩니다.
 
