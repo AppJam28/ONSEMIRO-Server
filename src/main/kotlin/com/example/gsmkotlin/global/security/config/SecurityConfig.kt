@@ -1,5 +1,7 @@
 package com.example.gsmkotlin.global.security.config
 
+import com.example.gsmkotlin.global.security.handler.CustomAccessDeniedHandler
+import com.example.gsmkotlin.global.security.handler.CustomAuthenticationEntryPointHandler
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.http.HttpMethod
@@ -12,7 +14,10 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import java.util.*
 
 @Configuration
-class SecurityConfig {
+class SecurityConfig (
+    private val accessDeniedHandler: CustomAccessDeniedHandler,
+    private val authenticationEntryPointHandler: CustomAuthenticationEntryPointHandler
+) {
     
     @Bean
     @Throws(Exception::class)
@@ -23,6 +28,11 @@ class SecurityConfig {
         
         http.csrf { csrf -> csrf.disable() }
             .cors { cors -> cors.configurationSource(corsConfigurationSource()) }
+        
+        http.exceptionHandling { handling -> handling
+            .accessDeniedHandler(accessDeniedHandler)
+            .authenticationEntryPoint(authenticationEntryPointHandler)
+        }
         
         http.sessionManagement { sessionManagement -> sessionManagement
             .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
