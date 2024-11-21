@@ -20,7 +20,7 @@ class RedisConfig (
     private val port: Int
 ) {
     @Bean
-    fun redisTemplate(): RedisConnectionFactory {
+    fun redisConnectionFactory(): RedisConnectionFactory {
         val redisConfig = RedisStandaloneConfiguration(host, port)
         val clientConfig = LettuceClientConfiguration.builder()
             .commandTimeout(Duration.ofSeconds(1))
