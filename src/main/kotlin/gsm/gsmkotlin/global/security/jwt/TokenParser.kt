@@ -21,12 +21,5 @@ class TokenParser (
     }
     
     private fun getAccessTokenSubject(accessToken: String): String =
-        getTokenBody(accessToken, Keys.hmacShaKeyFor(jwtEnv.accessSecret.toByteArray(StandardCharsets.UTF_8))).subject
-    
-    private fun getTokenBody(token: String, secret: Key): Claims =
-        Jwts.parserBuilder()
-            .setSigningKey(secret)
-            .build()
-            .parseClaimsJws(token)
-            .body
+        TokenGenerator.getTokenBody(accessToken, Keys.hmacShaKeyFor(jwtEnv.accessSecret.toByteArray(StandardCharsets.UTF_8))).subject
 }
