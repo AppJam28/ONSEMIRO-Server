@@ -4,6 +4,7 @@
 ```
 - spring boot, kotlin
 - http, spring error handler
+- security, jwt auth
 - gsm student user table
 ```
 
