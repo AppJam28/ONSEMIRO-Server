@@ -19,9 +19,8 @@ class JwtReqFilter (
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
         var accessToken = request.getHeader(AUTHORIZATION_HEADER)
         
-        if (accessToken != null) {
-            if (accessToken.startsWith(BEARER_PREFIX))
-                accessToken = accessToken.replace(BEARER_PREFIX, "")
+        if (accessToken != null && accessToken.startsWith(BEARER_PREFIX)) {
+            accessToken = accessToken.replace(BEARER_PREFIX, "")
             
             val authentication = tokenParser.authentication(accessToken)
             SecurityContextHolder.clearContext()
