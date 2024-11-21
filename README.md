@@ -16,19 +16,36 @@ repository 상단에 **use template**를 통해서 사용할 수 있습니다.
 
 아래와 같이 패키지들이 구성되어 있습니다.
 
+
 - domain
+    - auth
     - user
 - global
+    - config
     - error
+    - filter
     - security
+    - util
 
 ### 패키지 설명
 
-user, error 에는 학생 데이터 템플릿과 공통 에러 객체, 에러 핸들링 클래스들이 존재합니다.
+user, auth에는 학생 데이터 템플릿과 RefreshToken 관련 로직이 존재합니다.
+
+error, filter에는 error 핸들러와 JWT 인증, 필터단 예외 핸들링 필터가 존재합니다.
+
+security에는 기본적인 시큐리티 설정과 핸들러, JWT 관련 클래스가 존재합니다.
+
+config, util에는 redis 설정 클래스, properties scan 클래스가 존재합니다.
 
 ### 참고사항
 
+spring security UserDetailsService를 구현하기 위해 임시로 user의 repository를 생성해두었습니다. 만약 user의 id값을 다른 형태로 변경한다면 그에 맞게 repository를 커스텀 해주세요.
+
+JWT는 `Bearer ` prefix를 붙히고 있으며, accessToken은  `Authorization` 헤더에 담에 요청하는 것으로 구현되어 있습니다. 필요시 커스텀해서 사용해주세요.
+
 예외를 throw하는 방법은 GlobalException을 throw하시면서 에러메세지와 HttpStatus 값을 사용해 생성하셔서 throw하시면 됩니다.
+
+현재 인증되어있는 user의 정보를 얻고 싶다면 util.UserUtil 클래스의 getCurrentUser 메서드 호출로 user 객체를 반환 받을 수 있습니다.
 
 ### yml
 
