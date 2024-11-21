@@ -47,7 +47,6 @@ class SecurityConfig(
             .addFilterBefore(exceptionHandlerFilter, JwtReqFilter::class.java)
         
         http.authorizeHttpRequests { httpRequests -> httpRequests
-            .requestMatchers("/asd").authenticated()
             .anyRequest().permitAll()
         }
         
