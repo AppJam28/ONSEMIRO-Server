@@ -14,7 +14,7 @@ import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 
 @Component
-class ExceptionHandlerFilter (
+class ExceptionHandlerFilter(
     private val objectMapper: ObjectMapper
 ) : OncePerRequestFilter() {
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {

@@ -11,7 +11,7 @@ import java.nio.charset.StandardCharsets
 import java.security.Key
 
 @Component
-class TokenParser (
+class TokenParser(
     private val userDetailsService: CustomUserDetailsService,
     private val jwtEnv: JwtEnvironment
 ) {

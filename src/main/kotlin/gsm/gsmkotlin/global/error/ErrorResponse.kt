@@ -1,6 +1,6 @@
 package gsm.gsmkotlin.global.error
 
-class ErrorResponse (
+class ErrorResponse(
     val message: String
 ) {
     companion object {

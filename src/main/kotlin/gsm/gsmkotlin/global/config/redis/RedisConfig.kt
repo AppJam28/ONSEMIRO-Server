@@ -13,7 +13,7 @@ import java.time.Duration
 
 @Configuration
 @EnableRedisRepositories(enableKeyspaceEvents = RedisKeyValueAdapter.EnableKeyspaceEvents.ON_STARTUP)
-class RedisConfig (
+class RedisConfig(
     @Value("\${spring.data.redis.host}")
     private val host: String,
     @Value("\${spring.data.redis.port}")

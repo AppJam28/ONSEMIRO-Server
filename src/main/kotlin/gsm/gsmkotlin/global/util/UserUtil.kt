@@ -9,7 +9,7 @@ import org.springframework.security.core.context.SecurityContextHolder
 import org.springframework.stereotype.Component
 
 @Component
-class UserUtil (
+class UserUtil(
     private val userRepository: UserRepository
 ) {
     fun getCurrentUser(): User {

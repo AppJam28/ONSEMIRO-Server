@@ -1,6 +1,6 @@
 package gsm.gsmkotlin.global.security.jwt.dto
 
-data class TokenDto (
+data class TokenDto(
     val accessToken: String,
     val refreshToken: String,
     val accessTokenExp: Int,

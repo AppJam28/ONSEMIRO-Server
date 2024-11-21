@@ -2,7 +2,7 @@ package gsm.gsmkotlin.global.error
 
 import org.springframework.http.HttpStatus
 
-class GlobalException (
+class GlobalException(
     override val message: String,
     val httpStatus: HttpStatus
 ) : RuntimeException(message) {

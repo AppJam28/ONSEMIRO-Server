@@ -17,7 +17,7 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource
 import java.util.*
 
 @Configuration
-class SecurityConfig (
+class SecurityConfig(
     private val accessDeniedHandler: CustomAccessDeniedHandler,
     private val authenticationEntryPointHandler: CustomAuthenticationEntryPointHandler,
     private val jwtReqFilter: JwtReqFilter,

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component
 import org.springframework.web.filter.OncePerRequestFilter
 
 @Component
-class JwtReqFilter (
+class JwtReqFilter(
     private val tokenParser: TokenParser
 ) : OncePerRequestFilter() {
     
