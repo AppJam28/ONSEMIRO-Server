@@ -16,9 +16,9 @@ class UserUtil(
         val principal = SecurityContextHolder.getContext().authentication.principal
         
         if (principal is CustomUserDetails) {
-            val email = principal.username
-            return userRepository.findByEmail(email)
-                ?: throw GlobalException("유저를 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
+            val userId = principal.username
+            return userRepository.findById(userId.toLong())
+                .orElseThrow { GlobalException("유저를 찾을 수 없습니다.", HttpStatus.NOT_FOUND) }
         } else {
             throw GlobalException("현재 인증되어 있는 유저의 principal이 유효하지 않습니다.", HttpStatus.UNAUTHORIZED)
         }

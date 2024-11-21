@@ -27,10 +27,10 @@ class ReissueTokenService(
         val refreshToken = refreshTokenRepository.findByToken(removePrefixToken)
             ?: throw GlobalException("존재하지 않는 refresh token 입니다.",HttpStatus.NOT_FOUND)
         
-        val email = tokenGenerator.getEmailFromRefreshToken(refreshToken.token)
-        isExistsUser(email)
+        val userId = tokenGenerator.getUserIdFromRefreshToken(refreshToken.token)
+        isExistsUser(userId)
         
-        val tokenDto = tokenGenerator.generateToken(email)
+        val tokenDto = tokenGenerator.generateToken(userId)
         saveNewRefreshToken(tokenDto.refreshToken, refreshToken.userId)
         return tokenDto
     }
@@ -39,8 +39,8 @@ class ReissueTokenService(
         if (token == null) throw GlobalException("refresh token을 요청 헤더에 포함시켜 주세요.", HttpStatus.BAD_REQUEST)
     }
     
-    private fun isExistsUser(email: String) {
-        if (!userRepository.existsByEmail(email)) throw GlobalException("유저를 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
+    private fun isExistsUser(userId: String) {
+        if (!userRepository.existsById(userId.toLong())) throw GlobalException("유저를 찾을 수 없습니다.", HttpStatus.NOT_FOUND)
     }
     
     private fun saveNewRefreshToken(token: String, userId: Long) {

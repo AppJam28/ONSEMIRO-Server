@@ -11,7 +11,7 @@ class CustomUserDetails(
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> =
         mutableListOf(SimpleGrantedAuthority(user.authority.name))
     override fun getPassword(): String? = null
-    override fun getUsername(): String = user.email
+    override fun getUsername(): String = user.id.toString()
     override fun isAccountNonExpired(): Boolean = true
     override fun isAccountNonLocked(): Boolean = true
     override fun isCredentialsNonExpired(): Boolean = true

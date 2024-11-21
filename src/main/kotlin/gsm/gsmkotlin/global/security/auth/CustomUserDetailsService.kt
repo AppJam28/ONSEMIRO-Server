@@ -11,7 +11,9 @@ import org.springframework.stereotype.Service
 class CustomUserDetailsService(
     private val userRepository: UserRepository
 ) : UserDetailsService {
-    override fun loadUserByUsername(email: String): UserDetails =
-        CustomUserDetails(userRepository.findByEmail(email)
-            ?: throw GlobalException("유저를 찾을 수 없습니다.", HttpStatus.NOT_FOUND))
+    override fun loadUserByUsername(userId: String): UserDetails =
+        CustomUserDetails(
+            userRepository.findById(userId.toLong())
+                .orElseThrow { GlobalException("유저를 찾을 수 없습니다.", HttpStatus.NOT_FOUND) }
+        )
 }
