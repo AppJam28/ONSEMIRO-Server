@@ -12,10 +12,6 @@ import org.springframework.web.filter.OncePerRequestFilter
 class JwtReqFilter(
     private val tokenParser: TokenParser
 ) : OncePerRequestFilter() {
-    
-    private final val AUTHORIZATION_HEADER = "Authorization"
-    private final val BEARER_PREFIX = "Bearer "
-    
     override fun doFilterInternal(request: HttpServletRequest, response: HttpServletResponse, filterChain: FilterChain) {
         var accessToken = request.getHeader(AUTHORIZATION_HEADER)
         
@@ -28,5 +24,10 @@ class JwtReqFilter(
         }
         
         filterChain.doFilter(request, response)
+    }
+    
+    companion object {
+        const val AUTHORIZATION_HEADER = "Authorization"
+        const val BEARER_PREFIX = "Bearer "
     }
 }

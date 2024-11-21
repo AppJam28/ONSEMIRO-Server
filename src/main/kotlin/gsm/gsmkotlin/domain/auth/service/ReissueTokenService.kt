@@ -4,6 +4,7 @@ import gsm.gsmkotlin.domain.auth.entity.RefreshToken
 import gsm.gsmkotlin.domain.auth.repository.RefreshTokenRepository
 import gsm.gsmkotlin.domain.user.repository.UserRepository
 import gsm.gsmkotlin.global.error.GlobalException
+import gsm.gsmkotlin.global.filter.JwtReqFilter.Companion.BEARER_PREFIX
 import gsm.gsmkotlin.global.security.jwt.TokenGenerator
 import gsm.gsmkotlin.global.security.jwt.dto.TokenDto
 import gsm.gsmkotlin.global.security.jwt.properties.JwtEnvironment
@@ -18,14 +19,11 @@ class ReissueTokenService(
     private val refreshTokenRepository: RefreshTokenRepository,
     private val jwtEnv: JwtEnvironment
 ) {
-    
-    private final val BEARER_PREFIX = "Bearer "
-    
     @Transactional
     fun execute(token: String?): TokenDto {
         isNotNullRefreshToken(token)
         
-        val removePrefixToken: String = token!!.replace(BEARER_PREFIX,"")
+        val removePrefixToken: String = token!!.replace(BEARER_PREFIX, "")
         val refreshToken = refreshTokenRepository.findByToken(removePrefixToken)
             ?: throw GlobalException("존재하지 않는 refresh token 입니다.",HttpStatus.NOT_FOUND)
         
