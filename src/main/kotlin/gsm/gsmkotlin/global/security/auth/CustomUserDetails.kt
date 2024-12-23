@@ -9,7 +9,7 @@ class CustomUserDetails(
     private val user: User
 ) : UserDetails {
     override fun getAuthorities(): MutableCollection<out GrantedAuthority> =
-        mutableListOf(SimpleGrantedAuthority(user.authority.name))
+        mutableListOf(SimpleGrantedAuthority(user.role.name))
     override fun getPassword(): String? = null
     override fun getUsername(): String = user.id.toString()
     override fun isAccountNonExpired(): Boolean = true
